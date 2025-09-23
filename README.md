@@ -1,6 +1,8 @@
 # Synk - Rapid synteny plotting tool using [Compleasm](https://github.com/huangnengCSU/compleasm) outputs
 ![Synk logo](https://github.com/user-attachments/assets/e3af80d2-1236-4655-88d8-c4b27855fba0)
 
+Synk is a tool to plot synteny using BUSCO genes. With BUSCO genes, synteny is plotted rapidly and avoids the issue of mapping paralogs, sinch BUSCO genes are conserved, single copy orthologs. This makes Synk an effective tool for analysing synteny between distantly related species. 
+
 ## Installation
 Synk is a python script. Download it!
 ```
@@ -8,8 +10,8 @@ git clone https://github.com/jomhoff/Synk.git
 cd Synk
 ```
 Dependencies:
-  Pandas
-  Matplotlib
+  Pandas;
+  Matplotlib;
   Rideogram
   
 ## Use
@@ -61,4 +63,9 @@ Output Files:
 ## Result
 <img width="1209" alt="pfas-tiliqua_synteny" src="https://github.com/user-attachments/assets/2d7e9f15-501e-4991-a400-17588c6a1cca" />
 This is the result (with labels edited slightly in illustrator)
+
+## Citation
+If you use Synk in your work, please cite: 
+
+Hoffman, J.J., Burbrink, F.T., Pyron, R.A., Raxworthy, C.J., 2025. Telomere-to-telomere reference genome of the common five-lined skink, Plestiodon fasciatus (Squamata: Scincidae). https://doi.org/10.1101/2025.07.03.663019
 
