@@ -1,5 +1,5 @@
 # Synk - Rapid synteny plotting tool using [Compleasm](https://github.com/huangnengCSU/compleasm) outputs
-![Synk logo](https://github.com/user-attachments/assets/e3af80d2-1236-4655-88d8-c4b27855fba0)
+![Synk logo]()
 
 Synk is a tool to plot synteny using BUSCO genes. With BUSCO genes, synteny is plotted rapidly and avoids the issue of mapping paralogs, sinch BUSCO genes are conserved, single copy orthologs. This makes Synk an effective tool for analysing synteny between distantly related species. 
 
