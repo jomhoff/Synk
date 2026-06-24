@@ -1,0 +1,17 @@
+name: synk
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python>=3.10
+  - pandas
+  - matplotlib
+  - compleasm>=0.2.8
+  - miniprot
+  - hmmer
+  - r-base
+  - r-xml
+  - r-rsvg
+  - r-devtools
+  - r-remotes
+  - r-grimport2
