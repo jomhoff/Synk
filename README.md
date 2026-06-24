@@ -14,8 +14,83 @@ Dependencies:
   Pandas;
   Matplotlib;
   Rideogram
+
+See [DEPENDENCIES.md](DEPENDENCIES.md) for full Python, compleasm, miniprot, hmmsearch, R, RIdeogram, and SLURM setup notes.
+
+Recommended conda setup:
+```
+conda env create -f environment.yml
+conda activate synk
+Rscript -e 'remotes::install_github("TickingClock1992/RIdeogram")'
+```
   
 ## Use
+
+### One-shot compleasm wrapper
+
+Synk can now run compleasm first and then make every pairwise plot from one main species to any number of comparison species.
+
+Example with automatic karyotypes generated from FASTA sequence lengths:
+```
+python synk.py \
+  --main_name pfas \
+  --main_assembly pfas.fa \
+  --compare tiliqua=tiliqua.fa \
+  --compare egernia=egernia.fa \
+  --lineage sauropsida \
+  --threads 16 \
+  --outdir synk_output \
+  --plot
+```
+
+Use `--compare NAME=ASSEMBLY` once for each comparison species. Synk will write:
+```
+synk_output/
+  compleasm/        # one compleasm run per species
+  karyotypes/       # auto-generated karyotype and replacement files
+  pairwise/         # one Synk result folder per main-vs-comparison pair
+```
+
+If compleasm has already been run, add `--reuse_compleasm` and Synk will look for an existing `full_table` file under each species output folder before rerunning compleasm.
+
+You can also provide curated karyotypes and replacement maps. This is useful when you want chromosome labels or ordering to follow a published karyotype instead of FASTA length order:
+```
+python synk.py \
+  --main_name pfas \
+  --main_assembly pfas.fa \
+  --main_karyotype pfas_karyotype.txt \
+  --main_replacement pfas_replacement.txt \
+  --compare tiliqua=tiliqua.fa \
+  --compare_karyotype tiliqua=tiliqua_karyotype.txt \
+  --compare_replacement tiliqua=tiliqua_replacement.txt \
+  --lineage sauropsida \
+  --outdir synk_output \
+  --plot
+```
+
+Wrapper inputs:
+```
+--main_name              Name for the main/reference species
+--main_assembly          Main/reference species genome FASTA
+--compare NAME=FASTA     Comparison species genome FASTA; repeat for multiple species
+--lineage                BUSCO lineage to pass to compleasm
+--autolineage            Let compleasm choose the lineage instead of using --lineage
+--threads                Threads passed to compleasm (default: 8)
+--compleasm              compleasm command or path (default: compleasm)
+--compleasm_library      Optional compleasm lineage library path passed with -L
+--reuse_compleasm        Reuse existing compleasm full_table outputs when found
+--min_contig_length      Minimum FASTA sequence length to include in auto-karyotypes
+```
+
+Optional curated karyotype inputs:
+```
+--main_karyotype                 Main karyotype file
+--main_replacement               Main chromosome replacement map
+--compare_karyotype NAME=FILE    Comparison karyotype; repeat as needed
+--compare_replacement NAME=FILE  Comparison replacement map; repeat as needed
+```
+
+### Pairwise mode
 
 Usage example:
 ```
@@ -69,4 +144,3 @@ This is the result (with labels edited slightly in illustrator)
 If you use Synk in your work, please cite: 
 
 Hoffman, J.J., Burbrink, F.T., Pyron, R.A., Raxworthy, C.J., 2025. Telomere-to-telomere reference genome of the common five-lined skink, Plestiodon fasciatus (Squamata: Scincidae). https://doi.org/10.1101/2025.07.03.663019
-
