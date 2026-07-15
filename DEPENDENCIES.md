@@ -21,6 +21,8 @@ conda env create -f environment.yml
 conda activate synk
 ```
 
+`environment.yml` pins Python to 3.9 because the current conda builds for `compleasm` depend on `sepp`/`dendropy` combinations that do not solve reliably with `python>=3.10`.
+
 Then install the RIdeogram R package:
 
 ```bash
@@ -38,10 +40,10 @@ which Rscript
 Rscript -e 'library(RIdeogram); library(rsvg); cat("R plotting dependencies OK\n")'
 ```
 
-Install with conda:
+Install the pairwise-mode Python dependencies only:
 
 ```bash
-conda create -n synk -c conda-forge python=3.10 pandas matplotlib
+conda create -n synk -c conda-forge python=3.9 pandas matplotlib
 conda activate synk
 ```
 
@@ -72,7 +74,7 @@ hmmsearch
 Compleasm usually finds `miniprot` and `hmmsearch` from the same conda environment. Install with:
 
 ```bash
-conda create -n compleasm -c conda-forge -c bioconda python=3.10 compleasm pandas matplotlib
+conda create -n compleasm -c conda-forge -c bioconda python=3.9 compleasm pandas matplotlib miniprot hmmer
 conda activate compleasm
 ```
 
@@ -201,6 +203,8 @@ python synk.py \
 Add `--plot` only if `Rscript`, `RIdeogram`, and `rsvg` are available.
 
 ## Quick Troubleshooting
+
+If `conda env create -f environment.yml` reports a compleasm dependency conflict, check that the environment is still using `python=3.9`. `python>=3.10` can conflict with compleasm's `sepp`/`dendropy` requirements in current conda metadata.
 
 If compleasm fails while downloading BUSCO data, update compleasm:
 

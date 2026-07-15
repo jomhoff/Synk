@@ -23,6 +23,8 @@ conda env create -f environment.yml
 conda activate synk
 Rscript -e 'remotes::install_github("TickingClock1992/RIdeogram")'
 ```
+
+The conda environment pins Python to 3.9 because current `compleasm` conda builds depend on `sepp`/`dendropy` combinations that can conflict with `python>=3.10`.
   
 ## Use
 
