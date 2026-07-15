@@ -3,7 +3,9 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - python>=3.10
+  # compleasm currently depends on sepp/dendropy builds that solve reliably
+  # with Python 3.9, but conflict with the previous python>=3.10 spec.
+  - python=3.9
   - pandas
   - matplotlib
   - compleasm>=0.2.8
